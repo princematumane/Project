@@ -1,0 +1,7 @@
+<ng-container *ngIf="contentLoaded">
+    <mat-progress-bar mode="buffer"></mat-progress-bar>
+</ng-container>
+
+<ng-container *ngIf="!contentLoaded">
+    <router-outlet></router-outlet>
+</ng-container>

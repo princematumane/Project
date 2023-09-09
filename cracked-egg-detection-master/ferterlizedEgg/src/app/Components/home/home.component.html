@@ -1,0 +1,16 @@
+<div class="home-container">
+    <div class="background-image">
+      <h1>Eggs Fertilize Detection</h1>
+      <!-- <span>Database now have: {{(allEggsInfoData$ | async)?.length}} records</span> -->
+      <ng-container *ngIf="isDataLoading; else loadItems">
+        <span>Loading ...</span>
+        <mat-spinner mode="determinate"  [diameter]="60"></mat-spinner>
+      </ng-container>
+      <ng-template #loadItems>
+        <app-items-list [allEggsInfoData]="(allEggsInfoData$ | async) ?? []"></app-items-list>
+      </ng-template>
+
+    </div>
+  </div>
+ 
+  

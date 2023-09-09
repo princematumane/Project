@@ -1,0 +1,33 @@
+<ng-container *ngIf="eggsInfo">
+    <!-- <h3>Total eggs: {{eggsInfo.total}}</h3>
+    <h3>Eggs Abnormals Count: {{eggsInfo.eggAbnormals}}</h3>
+    <h3>Eggs Major Cracks Count: {{eggsInfo.eggsMajorCrack}}</h3>
+    <h3>Eggs Minor Cracks Count: {{eggsInfo.eggsMinorCrack}}</h3>
+    <h3>Fertilized Eggs Count: {{eggsInfo.fertilizedEggsCount}}</h3>
+   <pre>{{eggsInfo | json}}</pre>
+        <div class="eggs-section">
+            <img [src]="'data:image/jpg;base64,'+eggsInfo.eggsFertilizedImage" alt="eggs Fertilized">
+            <img [src]="'data:image/jpg;base64,'+eggsInfo.crackedEggsImage" alt="cracked Eggs">
+        </div> -->
+
+
+        <div class="image-info-container">
+            <div class="image-container">
+                <img [src]="'data:image/jpg;base64,'+eggsInfo.eggsFertilizedImage" alt="eggs Fertilized">
+                <img [src]="'data:image/jpg;base64,'+eggsInfo.crackedEggsImage" alt="cracked Eggs">
+            </div>
+            <div class="info-container">
+              <h2>Image Information</h2>
+              <ul>
+                <li><strong>Total eggs:</strong> {{eggsInfo.total}}</li>
+                <li><strong>Eggs Abnormals Count:</strong>{{eggsInfo.eggAbnormals}}</li>
+                <li><strong>Eggs Major Cracks Count:</strong>{{eggsInfo.eggsMajorCrack}}</li>
+                <li><strong>Eggs Minor Cracks Count:</strong> {{eggsInfo.eggsMinorCrack}}</li>
+                <li><strong>Fertilized Eggs Count:</strong> {{eggsInfo.fertilizedEggsCount}}</li>
+              </ul>
+            </div>
+          </div>
+</ng-container>
+
+
+  
