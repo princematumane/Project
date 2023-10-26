@@ -10,6 +10,7 @@ from pymongo.errors import PyMongoError
 import uvicorn
 import base64
 import time
+import datetime
 
 
 ## README
@@ -80,12 +81,12 @@ async def main():
 
     camera.release()
     cv2.destroyAllWindows()  # Close all OpenCV windows
-    img_path1 = '../images/eggcandler.jpg'
+    img_path1 = '../../images/eggcandler.jpg'
     img = cv2.imread(img_path1)
     response = getEggData(img)
 
     try:
-        #result = collection.insert_one(response)
+        result = collection.insert_one(response)
         return {"message": f"{message}","response": 12 } if message !="" else response
     except PyMongoError as e:
         return {"message": f"An exception occurred: {e._message}","response": "Data not saved in database" }
@@ -125,7 +126,7 @@ def convert_image_to_base64(image):
 def getEggData(image):
     img = image
     # resize for quicker processing 
-    img_resized = cv2.resize(img, (900, 900))
+    img_resized = cv2.resize(img, (900, 800))
     # rgb version
     img_resized_rgb = cv2.cvtColor(img_resized, cv2.COLOR_BGR2RGB)
     # convert to grayscale for processing
@@ -211,6 +212,7 @@ def getEggData(image):
     cracked_eggs = convert_image_to_base64(img_output)
 
     return {
+        "dataCaptured": datetime.datetime.now(),
         "eggsFertilized": eggs_fertilized,
         "crackedEggsImage": cracked_eggs,
         "eggsFertilizedImage": eggs_fertilized_images,
@@ -238,11 +240,19 @@ def analyze_egg(single_egg):
     edges = cv2.Canny(single_egg, threshold1=30, threshold2=70)
     
     # Count the number of detected blood vessels
-    num_blood_vessels = len(edges[edges > 0])
+    #num_blood_vessels = len(edges[edges > 0])
 
     # Set a threshold to determine if the egg is fertilized or not
-    fertilization_threshold = 500
-    is_fertilized = num_blood_vessels >= fertilization_threshold
+    #fertilization_threshold = 500
+    #is_fertilized = num_blood_vessels >= fertilization_threshold
+
+    avg_brightness = np.mean(single_egg)
+
+    # If the average brightness is greater than a certain threshold, then the egg is fertilized.
+    if avg_brightness > 35:
+        is_fertilized = False
+    else:
+        is_fertilized = True
     
     return is_fertilized
 

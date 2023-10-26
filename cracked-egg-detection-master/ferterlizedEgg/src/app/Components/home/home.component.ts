@@ -12,6 +12,7 @@ export interface IEggsInfo {
   eggsMajorCrack: number,
   eggsMinorCrack: number,
   total: number
+  dataCaptured?: Date
 }
 
 @Component({
@@ -50,7 +51,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.isDataLoading = true
     this.apiService.getAllScan().subscribe(data => {
       this.isDataLoading = false;
-      this.allEggsInfoDataSubject.next(data);
+      this.allEggsInfoDataSubject.next(data.sort((a, b) => {
+          if (a.dataCaptured && b.dataCaptured) {
+              return a.dataCaptured.getTime() - b.dataCaptured.getTime();
+          } else if (a.dataCaptured && !b.dataCaptured) {
+              return -1; // a comes after b if b.dataCaptured is undefined
+          } else if (!a.dataCaptured && b.dataCaptured) {
+              return 1; // a comes before b if a.dataCaptured is undefined
+          }
+          return 0; // leave unchanged if both are undefined
+      }));
     });
   }
 

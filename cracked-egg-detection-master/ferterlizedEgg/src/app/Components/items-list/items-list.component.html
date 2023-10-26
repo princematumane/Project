@@ -17,7 +17,8 @@
 
   <ng-container *ngIf="allEggs$ | async">
     <ng-container *ngFor="let item of (allEggs$ | async)">
-      <app-eggs-info [eggsInfo]="item" ></app-eggs-info>
+      <app-card-item [eggsInfo]="item"></app-card-item>
+      <!-- <app-eggs-info [eggsInfo]="item" ></app-eggs-info> -->
     </ng-container>
   </ng-container>
   

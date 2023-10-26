@@ -16,12 +16,14 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { ItemsListComponent } from './Components/items-list/items-list.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'; 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { CardItemComponent } from './Components/card-item/card-item.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     EggsInfoComponent,
-    ItemsListComponent
+    ItemsListComponent,
+    CardItemComponent
   ],
   imports: [
     BrowserModule,

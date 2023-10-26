@@ -7,6 +7,7 @@
         <mat-spinner mode="determinate"  [diameter]="60"></mat-spinner>
       </ng-container>
       <ng-template #loadItems>
+        <button mat-raised-button (click)="fetchEggsData()"> Get scan</button>
         <app-items-list [allEggsInfoData]="(allEggsInfoData$ | async) ?? []"></app-items-list>
       </ng-template>
 
