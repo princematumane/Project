@@ -51,7 +51,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.isDataLoading = true
     this.apiService.getAllScan().subscribe(data => {
       this.isDataLoading = false;
-      this.allEggsInfoDataSubject.next(data.sort((a, b) => {
+      try{
+        this.allEggsInfoDataSubject.next(data.sort((a, b) => {
           if (a.dataCaptured && b.dataCaptured) {
               return a.dataCaptured.getTime() - b.dataCaptured.getTime();
           } else if (a.dataCaptured && !b.dataCaptured) {
@@ -61,6 +62,9 @@ export class HomeComponent implements OnInit, OnDestroy {
           }
           return 0; // leave unchanged if both are undefined
       }));
+      }catch(e){
+        this.allEggsInfoDataSubject.next(data);
+      }
     });
   }
 
